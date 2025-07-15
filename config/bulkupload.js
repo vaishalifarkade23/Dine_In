@@ -1,27 +1,27 @@
 import { collection, doc, setDoc } from "firebase/firestore";
-import { slots,carouselImages,restaurants } from "../store/restaurant";
+import { restaurants } from "../store/restaurant"; // Importing restaurant data from store
 import { db } from "./firebaseConfig";
 
 
 //to upload restaurant data to firebase firestore
 // restaurants is imported from store/restaurant.js
-// const restaurantData =restaurants
+const restaurantData = restaurants;
 
-// const uploadData = async () =>{
-//     try {
-//         for(let i=0; i<restaurantData.length; i++){
-//             const restaurant = restaurantData[i]; // restaurant is piese of data jo setDoc me jane wala hai
+const uploadData = async () =>{
+    try {
+        for(let i=0; i<restaurantData.length; i++){
+            const restaurant = restaurantData[i]; // restaurant is piese of data jo setDoc me jane wala hai
        
-//             const docRef = doc(collection(db, "restaurants"), `restaurant-${i+1}`);//docRef is for which document we are going to create
-//              await setDoc(docRef,restaurant);// setDoc is used to set the data in the document
-//             console.log(`Restaurant ${i+1} uploaded successfully`);
-//         }
+            const docRef = doc(collection(db, "restaurants"), `restaurant_${i+1}`);//docRef is for which document we are going to create
+             await setDoc(docRef,restaurant);// setDoc is used to set the data in the document
+            console.log(`Restaurant ${i+1} uploaded successfully`);
+        }
         
-//     } catch (error) {
-//         console.error("Error uploading data: ", error);
-//     }
-// }
-//  export default uploadData;
+    } catch (error) {
+        console.error("Error uploading data: ", error);
+    }
+}
+ export default uploadData;
 
 
 
@@ -34,7 +34,7 @@ import { db } from "./firebaseConfig";
 //         for(let i=0; i < restaurantData.length; i++){
 //             const restaurant = restaurantData[i]; // restaurant is piese of data jo setDoc me jane wala hai
        
-//             const docRef = doc(collection(db, "carousel"), `carousel-${i+1}`);//docRef is for which document we are going to create
+//             const docRef = doc(collection(db, "carousel"), `carousel_${i+1}`);//docRef is for which document we are going to create
 //              await setDoc(docRef,restaurant);// setDoc is used to set the data in the document
 //             console.log(`carousel ${i+1} uploaded successfully`);
 //         }
@@ -46,20 +46,22 @@ import { db } from "./firebaseConfig";
 
 
 
-const restaurantData = slots; 
+// const restaurantData = slots; 
 
-const uploadData = async () =>{
-    try {
-        for(let i=0; i < restaurantData.length; i++){
-            const restaurant = restaurantData[i]; // restaurant is piese of data jo setDoc me jane wala hai
+// const uploadData = async () =>{
+//     try {
+//         for(let i=0; i < restaurantData.length; i++){
+//             const restaurant = restaurantData[i]; // restaurant is piese of data jo setDoc me jane wala hai
        
-            const docRef = doc(collection(db, "slots"), `slots-${i+1}`);//docRef is for which document we are going to create
-             await setDoc(docRef,restaurant);// setDoc is used to set the data in the document
-            console.log(`slots ${i+1} uploaded successfully`);
-        }
+//             const docRef = doc(collection(db, "slots"), `slot_${i+1}`);//docRef is for which document we are going to create
+//              await setDoc(docRef,restaurant);// setDoc is used to set the data in the document
+//             console.log(`slots ${i+1} uploaded successfully`);
+//         }
         
-    } catch (error) {
-        console.error("Error uploading data: ", error);
-    }
-}
- export default uploadData;
+//     } catch (error) {
+//         console.error("Error uploading data: ", error);
+//     }
+// }
+
+
+//  export default uploadData;

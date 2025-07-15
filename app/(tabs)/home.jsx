@@ -4,11 +4,11 @@ import { collection, getDocs, query } from "firebase/firestore";
 import { useEffect, useState } from 'react';
 import { ActivityIndicator, FlatList, Image, ImageBackground, Platform, ScrollView, Text, TouchableOpacity, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
+// import { uploadCarouselData } from '../../config/bulkupload';
+import uploadData from '../../config/bulkupload';
 import { db } from '../../config/firebaseConfig'; // Adjust path to your Firestore config
 
-// import { restaurants } from '../../store/restaurant';
-
-// import uploadData from '../../config/bulkupload';//to upload restaurant data to firebase firestore
+import { restaurants } from '../../store/restaurant';//to upload restaurant data to firebase firestore
 
 const logo = require("../../assets/images/dinetimelogo.png");
 const bannar = require("../../assets/images/homeBanner.png");
@@ -17,20 +17,19 @@ const bannar = require("../../assets/images/homeBanner.png");
 const home = () => {
   const router = useRouter();
   const [restaurants, setRestaurants] = useState([]); // state to hold restaurant data
-
+  
   //to upload restaurant data to firebase firestore
-// useEffect(()=>{
-//   // uploadData()
-// },[])
-// uploadData();
+  // useEffect(()=>{
+  //   uploadData();
+  // },[])
 
 
 
   const renderItem = ({ item }) => (
 
-    <TouchableOpacity 
-    onPress={()=>router.push(`/restaurant/${item.name}`)} // Navigate to restaurant details page
-    className="bg-[#5f5f5f] justify-center rounded-lg p-4 mx-4 shadow-md max-h-64 max-w-xs">
+    <TouchableOpacity
+      onPress={() => router.push(`/restaurant/${item.name}`)} // Navigate to restaurant details page
+      className="bg-[#5f5f5f] justify-center rounded-lg p-4 mx-4 shadow-md max-h-64 max-w-xs">
       <Image
         resizeMode="cover"
         source={{ uri: item.image }}
@@ -45,16 +44,16 @@ const home = () => {
 
   // Function to fetch restaurants from Firestore
   const getRestaurants = async () => {
-      const q = query(collection(db, "restaurants")); // Query to get all documents from the "restaurants" collection
-      const res = await getDocs(q);  // Fetching all documents from the "restaurants" collection, 
-      // getDocs is used to get multiple  documents from the collection  //getDoc used to get single document from the collection
-      res.forEach((item) =>{
-        setRestaurants((prev) => [...prev, item.data()]); // Adding each restaurant data to the state
-      });
-    };
-    useEffect(() => {
-      getRestaurants(); // Fetch restaurants when the component mounts  
-    }, []); // Empty dependency array means this effect runs once when the component mounts
+    const q = query(collection(db, "restaurants")); // Query to get all documents from the "restaurants" collection
+    const res = await getDocs(q);  // Fetching all documents from the "restaurants" collection, 
+    // getDocs is used to get multiple  documents from the collection  //getDoc used to get single document from the collection
+    res.forEach((item) => {
+      setRestaurants((prev) => [...prev, item.data()]); // Adding each restaurant data to the state
+    });
+  };
+  useEffect(() => {
+    getRestaurants(); // Fetch restaurants when the component mounts  
+  }, []); // Empty dependency array means this effect runs once when the component mounts
 
   return (
     <SafeAreaView style={[{ backgroundColor: "#2b2b2b" },
