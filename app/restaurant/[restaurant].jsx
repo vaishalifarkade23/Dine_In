@@ -87,39 +87,35 @@ export default function Restaurant() {
     // if (!carousalLength) return;
 
     //next images
-    if( currentIndex < carousalLength - 1)
-    {
-      const nextIndex = currentIndex + 1 ;
+    if (currentIndex < carousalLength - 1) {
+      const nextIndex = currentIndex + 1;
       setCurrentIndex(nextIndex);
-      flatListRef.current.scrollToIndex({index: nextIndex,animated :true});
+      flatListRef.current.scrollToIndex({ index: nextIndex, animated: true });
     }
     //go on last image automaticaly come in 1st image
-     if( currentIndex == carousalLength - 1)
-    {
-      const nextIndex = 0 ;
+    if (currentIndex == carousalLength - 1) {
+      const nextIndex = 0;
       setCurrentIndex(nextIndex);
-      flatListRef.current.scrollToIndex({index: nextIndex,animated :true});
+      flatListRef.current.scrollToIndex({ index: nextIndex, animated: true });
     }
   }
-  
+
   const handlePrevImage = () => {
 
     const carousalLength = carouselData[0]?.images.length;
     // if (!carousalLength) return;
 
     //next images
-    if( currentIndex > 0)
-    {
-      const prevIndex = currentIndex - 1 ;
+    if (currentIndex > 0) {
+      const prevIndex = currentIndex - 1;
       setCurrentIndex(prevIndex);
-      flatListRef.current.scrollToIndex({index: prevIndex,animated :true});
-    } 
+      flatListRef.current.scrollToIndex({ index: prevIndex, animated: true });
+    }
     //go on last image automaticaly come in 1st image
-     if( currentIndex == 0)
-    {
-      const prevIndex = carousalLength - 1 ;
+    if (currentIndex == 0) {
+      const prevIndex = carousalLength - 1;
       setCurrentIndex(prevIndex);
-      flatListRef.current.scrollToIndex({index: prevIndex,animated :true});
+      flatListRef.current.scrollToIndex({ index: prevIndex, animated: true });
     }
   }
 
@@ -136,11 +132,20 @@ export default function Restaurant() {
         }}>
           <Ionicons onPress={handleNextImage} name="arrow-forward" size={24} color="white" />
         </View>
-         <View style={{
+        <View style={{
           position: 'absolute', top: '50%', backgroundColor: 'rgba(0,0,0,0.6)',
           borderRadius: 50, padding: 5, zIndex: 10, left: '2%'
         }}>
           <Ionicons onPress={handlePrevImage} name="arrow-back" size={24} color="white" />
+        </View>
+        <View style={{
+          position: "absolute", display: 'flex', justifyContent: 'center', alignItems: 'center',
+          flexDirection: 'row', left: '50%', transform: [{ translateX: -50 }], zIndex: 10,
+          bottom: 15
+        }}>
+          {carouselData[0]?.images?.map((_, i) => (
+            <View key={i} className={`bg-white h-2 w-2 ${i==currentIndex && "h-3 w-3"} p-1 mx-1 rounded-full`} />
+          ))}
         </View>
         <Image
           source={{ uri: item }}
